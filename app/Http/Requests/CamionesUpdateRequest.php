@@ -13,7 +13,7 @@ class CamionesUpdateRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,24 @@ class CamionesUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'modelo' => 'required',
+            'marca' => 'required',
+            'vin' => 'required',
+            'anio' => 'required|numeric',
+            'capacidad' => 'required|numeric'
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'modelo.required' => 'El Modelo es obligatorio',
+            'marca.required' => 'La Marca es obligatoria',
+            'vin.required' => 'El VIN es obligatorio',
+            'anio.required' => 'El Año es obligatorio',
+            'anio.numeric' => 'El Año sólo debe contener números',
+            'capacidad.required' => 'La Capacidad es obligatoria',
+            'capacidad.numeric' => 'La Capacidad sólo debe contener números'
         ];
     }
 }

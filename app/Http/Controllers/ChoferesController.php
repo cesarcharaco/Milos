@@ -45,7 +45,7 @@ class ChoferesController extends Controller
         $chofer->fill($request)->save();
 
         flash('<i class="icon-circle-check"></i> Conductor registrado satisfactoriamente!')->success()->important();
-                    return redirect()->to('choferes');
+        return redirect()->to('choferes');
     }
 
     /**
@@ -87,12 +87,12 @@ class ChoferesController extends Controller
 
         if (!empty($buscar_rut)) {
             flash('<i class="icon-circle-check"></i> El RUT ya se encuentra registrado!')->warning()->important();
-                    return redirect()->back();
+            return redirect()->back();
         } else {
             $chofer=Choferes::find($id);
             $chofer->fill($request)->save();
             flash('<i class="icon-circle-check"></i> Conductor actualizado satisfactoriamente!')->success()->important();
-                    return redirect()->to('choferes');
+            return redirect()->to('choferes');
 
         }
         
@@ -110,10 +110,10 @@ class ChoferesController extends Controller
 
         if ($chofer->delete()) {
             flash('<i class="icon-circle-check"></i> Registro eliminado satisfactoriamente!')->success()->important();
-                    return redirect()->to('choferes');
+            return redirect()->to('choferes');
         } else {
             flash('<i class="icon-circle-check"></i> No se udo eliminar al Conductor!')->success()->important();
-                    return redirect()->to('choferes');
+            return redirect()->to('choferes');
         }
         
     }
@@ -126,7 +126,7 @@ class ChoferesController extends Controller
         $request->save();
 
         flash('<i class="icon-circle-check"></i> El Status del Conductor ha sido cambiado '.$request->status.' satisfactoriamente!')->success()->important();
-                    return redirect()->to('choferes');
+        return redirect()->to('choferes');
 
     }
 
