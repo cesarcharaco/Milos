@@ -4,7 +4,7 @@ function buscar_asignacion($id_chofer)
 {
 	$encontrado="No";
 
-	$buscar=App\Asignaciones::where('id_chofer',$id_chofer)->first();
+	$buscar=App\Asignaciones::where('id_chofer',$id_chofer)->where('status','Asignado')->first();
 
 	if (!empty($buscar)) {
 		$encontrado=$buscar->id_chofer;

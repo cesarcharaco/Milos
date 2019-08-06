@@ -76,10 +76,12 @@
                                             <td align="center">
                                                 @if(buscar_asignacion($key->id)=="No" and $key->status=="Activo")
                                                     <a href="{{ route('choferes.asignar',$key->id) }}" title="Asignar Camión" class="btn btn-info btn-sm"><i class="fa fa-send"></i>&nbsp; </a>
+                                                @elseif(buscar_asignacion($key->id)!=="No" and $key->status=="Activo")
+                                                    <a href="{{ route('choferes.retirar',$key->id) }}" title="Retirar Camión" class="btn btn-info btn-sm"><i class="fa fa-times"></i>&nbsp; </a>
                                                 @endif
                                                 <a href="{{ route('choferes.edit',$key->id) }}" title="Actualizar Conductor" class="btn btn-info btn-sm"><i class="fa fa-edit"></i>&nbsp; </a>
                                                 <a href="#" title="Eliminar Conductor" class="btn btn-danger btn-sm"><i class="fa fa-trash" onclick="eliminar('{{ $key->id }}')" data-toggle="modal" data-target="#modalEliminar"></i>&nbsp; </a>
-                                                
+                                                <a href="#" title="Cambiar Status Conductor" class="btn btn-success btn-sm"><i class="fa fa-lock" onclick="cambiar_status('{{ $key->id }}')" data-toggle="modal" data-target="#modalCambiarStatus"></i>&nbsp; </a>
                                             </td>
                                         </tr>
                                         @endforeach
@@ -121,11 +123,56 @@
     </div>
 </div>
 <!-- fi del modal eliminar -->
+
+<!-- MOdal para cambiar status -->
+<div class="modal fade" id="modalCambiarStatus" tabindex="-1" role="dialog" aria-labelledby="smallLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="smallLabel">Cambiar Status de Conductor</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    ¿Está seguro de cambiar el status?
+                </p>
+                 {!! Form::open(['route' => ['choferes.cambiar'], 'method' => 'POST']) !!}
+                @csrf
+             <input type="hidden" name="id_chofer" id="id_chofer2">
+             <div class="row form-group">
+                <div class="col col-md-3">
+                    <label for="certificado" class=" form-control-label"> Status</label>
+                </div>
+                <div class="col-12 col-md-9">
+                    <select class="form-control" name="certificado" id="certificado">
+                        <option value="Activo">Activo</option>
+                        <option value="Reposo">Reposo</option>
+                        <option value="Retirado">Retirado</option>
+                    </select>
+                    <small>Es obligatorio seleccionar un status</small>
+                </div>
+            </div>       
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn btn-primary">Confirmar</button>
+            </div>
+            {!! Form::close() !!}
+        </div>
+    </div>
+</div>
+<!-- fi del modal cambiar status -->
 @endsection
 @section('scripts')
 <script type="text/javascript">
     function eliminar(id_chofer) {
         $("#id_chofer").val(id_chofer);
+    }
+
+    function cambiar_status(id_chofer) {
+        $("#id_chofer2").val(id_chofer);
     }
 </script>
 @endsection

@@ -22,6 +22,8 @@ Route::group(['middleware' => ['auth', 'web']], function () {
 	Route::resource('choferes','ChoferesController');
 	Route::get('choferes/{id}/asignar','ChoferesController@asignar')->name('choferes.asignar');
 	Route::post('choferes/asignacion','ChoferesController@asignacion')->name('choferes.asignacion');
+	Route::get('choferes/{id}/retirar','ChoferesController@retirar')->name('choferes.retirar');
+	Route::post('choferes/cambiar','ChoferesController@cambiar_status')->name('choferes.cambiar');
 	Route::resource('camiones','CamionesController');
 	Route::resource('despachos','DespachosController');
 	Route::resource('recepciones','RecepcionesController');

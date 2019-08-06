@@ -153,14 +153,17 @@ class ChoferesController extends Controller
         return redirect()->to('choferes');
     }
 
-    public function retirar(Request $request)
+    public function retirar($id)
     {
-        $asignacion=Asignaciones::where('id_chofer',$request->id_chofer)->where('status','Asignado')->first();
+        
+        $asignacion=Asignaciones::where('id_chofer',$id)->where('status','Asignado')->first();
 
         $asignacion->status='Retirado';
         $asignacion->save();
 
         flash('<i class="icon-circle-check"></i> Al Conductor se le ha sido Retirado el Camión asignado!')->success()->important();
         return redirect()->to('choferes');   
-    }    
+    } 
+
+
 }
