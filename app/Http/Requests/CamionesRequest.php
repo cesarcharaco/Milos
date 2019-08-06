@@ -13,7 +13,7 @@ class CamionesRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,16 @@ class CamionesRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'modelo' => 'required',
+            'marca' => 'required',
+            'vin' => 'required|unique:camiones',
+            'anio' => 'required|numeric',
+            'capacidad' => 'required|numeric'
         ];
+    }
+
+    public function FunctionName($value='')
+    {
+        # code...
     }
 }

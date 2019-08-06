@@ -14,7 +14,9 @@ class CamionesController extends Controller
      */
     public function index()
     {
-        //
+        $camiones=Camiones::all();
+
+        return view('camiones.index',compact('camiones'));
     }
 
     /**
@@ -24,7 +26,7 @@ class CamionesController extends Controller
      */
     public function create()
     {
-        //
+        return view('camiones.create');
     }
 
     /**
@@ -33,7 +35,7 @@ class CamionesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CamionesRequest $request)
     {
         //
     }
