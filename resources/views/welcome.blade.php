@@ -1,99 +1,77 @@
 <!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!--> 
+<html class="no-js" lang=""> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Ela Admin - HTML5 Admin Template</title>
+    <meta name="description" content="Ela Admin - HTML5 Admin Template">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+    <link rel="apple-touch-icon" href="https://i.imgur.com/QRAUqs9.png">
+    <link rel="shortcut icon" href="https://i.imgur.com/QRAUqs9.png">
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('ElaAdmin/assets/css/normalize.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('ElaAdmin/assets/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('ElaAdmin/assets/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('ElaAdmin/assets/css/themify-icons.css') }}">
+    <link rel="stylesheet" href="{{ asset('ElaAdmin/assets/css/pe-icon-7-stroke.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('ElaAdmin/assets/css/flag-icon.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('ElaAdmin/assets/css/cs-skin-elastic.css') }}">
+    <link rel="stylesheet" href="{{ asset('ElaAdmin/assets/css/style.css') }}">
 
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Nunito', sans-serif;
-                font-weight: 200;
-                height: 100vh;
-                margin: 0;
-            }
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 
-            .full-height {
-                height: 100vh;
-            }
+    <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
+</head>
+<body class="bg-dark">
 
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 13px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
+    <div class="sufee-login d-flex align-content-center flex-wrap">
+        <div class="container">
+            <div class="login-content">
+                <div class="login-logo">
+                    <a href="index.html">
+                        <img class="align-content" src="{{ asset('ElaAdmin/images/logo.png') }}" alt="">
+                    </a>
                 </div>
-            @endif
+                <div class="login-form">
+                    <form class="form-horizontal m-t-20" id="loginform" action="{{ route('login') }}" method="POST">
+                        @csrf
+                        <div class="form-group">
+                            <label>Correo electrónico:</label>
+                            <input type="email" class="form-control form-control-lg" placeholder="Correo electrónico" aria-label="Username" aria-describedby="basic-addon1" required="" name="email" value="{{ old('email') }}" autocomplete="email" autofocus="">
+                        </div>
+                        <div class="form-group">
+                            <label>Contraseña:</label>
+                            <input type="password" class="form-control form-control-lg" placeholder="Contraseña" aria-label="Password" aria-describedby="basic-addon1" required="" name="password" value="{{ old('password') }}" autocomplete="current-password">
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox"> Recuerdame
+                            </label>
+                            <label class="pull-right">
+                                <a href="#">¿Olvidó su contraseña?</a>
+                            </label>
 
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                        </div>
+                        <button type="submit" class="btn btn-success btn-flat m-b-30 m-t-30">Iniciar sesión</button>
+                        <div class="register-link m-t-15 text-center">
+                            <p>¿No tiene cuenta ? <a href="#"> Registrarse</a></p>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
-    </body>
+    </div>
+
+    <script src="{{ asset('ElaAdmin/assets/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('ElaAdmin/assets/js/popper.min.js') }}"></script>
+    <script src="{{ asset('ElaAdmin/assets/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('ElaAdmin/assets/js/jquery.matchHeight.min.js') }}"></script>
+    <script src="{{ asset('ElaAdmin/assets/js/main.js') }}"></script>
+
+</body>
 </html>
