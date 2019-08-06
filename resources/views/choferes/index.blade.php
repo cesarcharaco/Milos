@@ -7,7 +7,7 @@
                     <div class="col-sm-4">
                         <div class="page-header float-left">
                             <div class="page-title">
-                                <h1>Tablero</h1>
+                                <h1>Listado</h1>
                             </div>
                         </div>
                     </div>
@@ -30,6 +30,20 @@
                 <!-- Widgets  -->
                 <div class="row">
                     <div class="col-md-12">
+                        @include('flash::message')
+                         @if (count($errors) > 0)
+                            <div class="alert alert-danger">
+                            @include('flash::message')
+                            <p>Corrige los siguientes errores:</p>
+                            <ul>
+                                @foreach ($errors->all() as $message)
+                                    <li>{{ $message }}</li>
+                                @endforeach
+                            </ul>
+                            </div>
+                        @endif
+                    </div>
+                    <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
                                 <strong class="card-title">Listado de conductores</strong>
@@ -42,7 +56,7 @@
                                             <th>Nombres</th>
                                             <th>Apellidos</th>
                                             <th>Rut</th>
-                                            <th>Género</th>
+                                            <th>Edad</th>
                                             <th>licencia</th>
                                             <th>Certificado</th>
                                             <th>Status</th>
@@ -55,13 +69,13 @@
                                             <td>{{ $key->nombres }}</td>
                                             <td>{{ $key->apellidos }}</td>
                                             <td>{{ $key->rut }}</td>
-                                            <td>{{ $key->genero }}</td>
+                                            <td>{{ $key->edad }}</td>
                                             <td>{{ $key->licencia }}</td>
                                             <td>{{ $key->certificado }}</td>
                                             <td>{{ $key->status }}</td>
                                             <td align="center">
-                                                <a href="#" class="btn btn-info btn-sm"><i class="fa fa-edit"></i>&nbsp; </a>
-                                                <a href="#" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i>&nbsp; </a>
+                                                <a href="{{ route('choferes.edit',$key->id) }}" class="btn btn-info btn-sm"><i class="fa fa-edit"></i>&nbsp; </a>
+                                                <a href="#" class="btn btn-danger btn-sm"><i class="fa fa-trash" onclick="eliminar('{{ $key->id }}')" data-toggle="modal" data-target="#modalEliminar"></i>&nbsp; </a>
                                             </td>
                                         </tr>
                                         @endforeach
@@ -76,4 +90,38 @@
             </div>
             <!-- .animated -->
         </div>
+<!-- MOdal para eliminar -->
+<div class="modal fade" id="modalEliminar" tabindex="-1" role="dialog" aria-labelledby="smallLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="smallLabel">Eliminar Conductor</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    ¿Está seguro de eliminar éste registro?
+                </p>
+                 {!! Form::open(['route' => ['choferes.destroy',1033], 'method' => 'DELETE']) !!}
+                @csrf
+             <input type="hidden" name="id_chofer" id="id_chofer">       
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn btn-primary">Confirmar</button>
+            </div>
+            {!! Form::close() !!}
+        </div>
+    </div>
+</div>
+<!-- fi del modal eliminar -->
+@endsection
+@section('scripts')
+<script type="text/javascript">
+    function eliminar(id_chofer) {
+        $("#id_chofer").val(id_chofer);
+    }
+</script>
 @endsection

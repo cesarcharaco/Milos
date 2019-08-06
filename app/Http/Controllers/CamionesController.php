@@ -42,7 +42,7 @@ class CamionesController extends Controller
 
         $camion= new Camiones();
 
-        $camion->fill($request)->save();
+        $camion->fill($request->all())->save();
 
         flash('<i class="icon-circle-check"></i> Camión registrado satisfactoriamente!')->success()->important();
         return redirect()->to('camiones');
@@ -90,8 +90,8 @@ class CamionesController extends Controller
             return redirect()->back();
         } else {
             $camion=Camiones::find($id);
-            $camion->fill($request)->save();
-            flash('<i class="icon-circle-check"></i> Conductor actualizado satisfactoriamente!')->success()->important();
+            $camion->fill($request->all())->save();
+            flash('<i class="icon-circle-check"></i> Datos el Camión actualizados satisfactoriamente!')->success()->important();
             return redirect()->to('camiones');
 
         }

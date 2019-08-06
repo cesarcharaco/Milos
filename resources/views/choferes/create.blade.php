@@ -7,7 +7,7 @@
                     <div class="col-sm-4">
                         <div class="page-header float-left">
                             <div class="page-title">
-                                <h1>Tablero</h1>
+                                <h1>Registro</h1>
                             </div>
                         </div>
                     </div>
@@ -15,8 +15,8 @@
                         <div class="page-header float-right">
                             <div class="page-title">
                                 <ol class="breadcrumb text-right">
-                                    <li><a href="{{ route('choferes.index') }}">Camiones</a></li>
-                                    <li class="active">Registrar conductor</li>
+                                    <li><a href="{{ route('choferes.index') }}">Conductores</a></li>
+                                    <li class="active">Registrar Conductor</li>
                                 </ol>
                             </div>
                         </div>
@@ -31,9 +31,23 @@
                 <!-- Widgets  -->
                 <div class="row">
                     <div class="col-md-12">
+                        @include('flash::message')
+                         @if (count($errors) > 0)
+                            <div class="alert alert-danger">
+                            @include('flash::message')
+                            <p>Corrige los siguientes errores:</p>
+                            <ul>
+                                @foreach ($errors->all() as $message)
+                                    <li>{{ $message }}</li>
+                                @endforeach
+                            </ul>
+                            </div>
+                        @endif
+                    </div>
+                    <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <strong>Registro de conductor</strong> <small>Todos los campos (<b style="color:red;">*</b>) son requeridos.</small>
+                                <strong>Registro de Conductor</strong> <small>Todos los campos (<b style="color:red;">*</b>) son requeridos.</small>
                             </div>
                             <div class="card-body card-block">
                                 <form action="{{ route('choferes.store') }}" method="POST" class="form-horizontal">
@@ -43,7 +57,12 @@
                                             <label for="nombres" class=" form-control-label"><b style="color: red;">*</b> Nombre</label>
                                         </div>
                                         <div class="col-12 col-md-9">
-                                            <input type="text" id="nombres" name="nombres" placeholder="Ingrese nombres..." class="form-control">
+                                            <input type="text" id="nombres" name="nombres" placeholder="Ingrese nombres..." class="form-control" required="required" value="{{ old('nombres') }}">
+                                            @error('nombres')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="row form-group">
@@ -51,7 +70,12 @@
                                             <label for="apellidos" class=" form-control-label"><b style="color: red;">*</b> Apellidos</label>
                                         </div>
                                         <div class="col-12 col-md-9">
-                                            <input type="text" id="apellidos" name="apellidos" placeholder="Ingrese apellidos..." class="form-control">
+                                            <input type="text" id="apellidos" name="apellidos" placeholder="Ingrese apellidos..." class="form-control" required="required" value="{{ old('apellidos') }}">
+                                            @error('apellidos')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="row form-group">
@@ -59,7 +83,12 @@
                                             <label for="rut" class=" form-control-label"><b style="color: red;">*</b> Rut</label>
                                         </div>
                                         <div class="col-12 col-md-9">
-                                            <input type="text" id="rut" name="rut" placeholder="Ingrese rut..." class="form-control">
+                                            <input type="text" id="rut" name="rut" placeholder="Ingrese rut..." class="form-control" required="required" value="{{ old('rut') }}">
+                                            @error('rut')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="row form-group">
@@ -67,7 +96,13 @@
                                             <label for="edad" class=" form-control-label"><b style="color: red;">*</b> Edad</label>
                                         </div>
                                         <div class="col-12 col-md-9">
-                                            <input type="text" id="edad" name="edad" placeholder="Ingrese edad..." class="form-control">
+                                            <input type="number" id="edad" name="edad" placeholder="Ingrese edad..." class="form-control" min="18" max="80" required="required" value="{{ old('edad') }}" >
+                                            <small>La edad debe comprender entre 18 y 80 años</small>
+                                            @error('edad')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="row form-group">
@@ -75,7 +110,7 @@
                                             <label for="genero" class=" form-control-label"><b style="color: red;">*</b> Género</label>
                                         </div>
                                         <div class="col-12 col-md-9">
-                                            <select class="form-control" name="genero" id="genero">
+                                            <select class="form-control" name="genero" id="genero" required="required">
                                                 <option value="Masculino">Masculino</option>
                                                 <option value="Femenino">Femenino</option>
                                             </select>
@@ -100,18 +135,6 @@
                                             <select class="form-control" name="certificado" id="certificado">
                                                 <option value="Si">Si</option>
                                                 <option value="No">No</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="row form-group">
-                                        <div class="col col-md-3">
-                                            <label for="status" class=" form-control-label"><b style="color: red;">*</b> Status</label>
-                                        </div>
-                                        <div class="col-12 col-md-9">
-                                            <select class="form-control" name="status" id="status">
-                                                <option value="Activo">Activo</option>
-                                                <option value="Reposo">Reposo</option>
-                                                <option value="Retirado">Retirado</option>
                                             </select>
                                         </div>
                                     </div>

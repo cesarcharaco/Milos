@@ -13,7 +13,7 @@ class ChoferesUpdateRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -39,7 +39,7 @@ class ChoferesUpdateRequest extends FormRequest
         return [
             'nombres.required' => 'Los Nombres son obligatorios',
             'apellidos.required' => 'Los Apellidos son obligatorios',
-            'rut.required' => 'El RUT es obligatorio'
+            'rut.required' => 'El RUT es obligatorio',
             'edad.required' => 'La edad es obligatoria',
             'edad.numeric' => 'La edad sólo debe contener números',
             'genero.required' => 'Debe seleccionar un género',

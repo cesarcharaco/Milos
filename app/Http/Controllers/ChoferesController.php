@@ -42,7 +42,7 @@ class ChoferesController extends Controller
     {
         //dd($request->all());
         $chofer=new Choferes();
-        $chofer->fill($request)->save();
+        $chofer->fill($request->all())->save();
 
         flash('<i class="icon-circle-check"></i> Conductor registrado satisfactoriamente!')->success()->important();
         return redirect()->to('choferes');
@@ -90,7 +90,7 @@ class ChoferesController extends Controller
             return redirect()->back();
         } else {
             $chofer=Choferes::find($id);
-            $chofer->fill($request)->save();
+            $chofer->fill($request->all())->save();
             flash('<i class="icon-circle-check"></i> Conductor actualizado satisfactoriamente!')->success()->important();
             return redirect()->to('choferes');
 
