@@ -12,7 +12,7 @@ class Choferes extends Model
 
     public function asignacion()
     {
-    	return $this->hasMany('App\Choferes','id_chofer','id');
+    	return $this->hasOne('App\Asignaciones','id_chofer','id');
     }
 
     public function despachos()

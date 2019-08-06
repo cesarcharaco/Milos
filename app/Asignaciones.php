@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Asignaciones extends Model
 {
-    protected $table='asignaciones';
+    protected $table='asignacion';
 
     protected $fillable=['id_chofer','id_camion','status'];
 

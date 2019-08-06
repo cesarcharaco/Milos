@@ -13,6 +13,6 @@ class Camiones extends Model
 
     public function asignacion()
     {
-    	return $this->hasMany('App\Asignacion','id_camion','id');
+    	return $this->hasOne('App\Asignaciones','id_camion','id');
     }
 }

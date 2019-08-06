@@ -46,8 +46,8 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <strong class="card-title">Listado de conductores</strong>
-                                <a href="{{ route('choferes.create') }}" class="btn btn-primary btn-sm pull-right"><i class="fa fa-star"></i>&nbsp; Registrar conductor</a>
+                                <strong class="card-title">Listado de Conductores</strong>
+                                <a href="{{ route('choferes.create') }}" class="btn btn-primary btn-sm pull-right"><i class="fa fa-star"></i>&nbsp; Registrar Conductor</a>
                             </div>
                             <div class="card-body">
                                 <table id="bootstrap-data-table" class="table table-striped table-bordered">
@@ -74,8 +74,12 @@
                                             <td>{{ $key->certificado }}</td>
                                             <td>{{ $key->status }}</td>
                                             <td align="center">
-                                                <a href="{{ route('choferes.edit',$key->id) }}" class="btn btn-info btn-sm"><i class="fa fa-edit"></i>&nbsp; </a>
-                                                <a href="#" class="btn btn-danger btn-sm"><i class="fa fa-trash" onclick="eliminar('{{ $key->id }}')" data-toggle="modal" data-target="#modalEliminar"></i>&nbsp; </a>
+                                                @if(buscar_asignacion($key->id)=="No" and $key->status=="Activo")
+                                                    <a href="{{ route('choferes.asignar',$key->id) }}" title="Asignar Camión" class="btn btn-info btn-sm"><i class="fa fa-send"></i>&nbsp; </a>
+                                                @endif
+                                                <a href="{{ route('choferes.edit',$key->id) }}" title="Actualizar Conductor" class="btn btn-info btn-sm"><i class="fa fa-edit"></i>&nbsp; </a>
+                                                <a href="#" title="Eliminar Conductor" class="btn btn-danger btn-sm"><i class="fa fa-trash" onclick="eliminar('{{ $key->id }}')" data-toggle="modal" data-target="#modalEliminar"></i>&nbsp; </a>
+                                                
                                             </td>
                                         </tr>
                                         @endforeach

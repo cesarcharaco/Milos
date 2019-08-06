@@ -19,6 +19,12 @@ class CamionesTableSeeder extends Seeder
         	'capacidad' => 9000
         ]);
 
+        \DB::table('asignacion')->insert([
+            'id_chofer' => 1,
+            'id_camion' => 1,
+            'status' => 'Asignado'
+        ]);
+
         \DB::table('camiones')->insert([
         	'modelo' => '7600 Pluma',
         	'marca' => 'International',

@@ -18,7 +18,7 @@ class ChoferesController extends Controller
     public function index()
     {
         $choferes=Choferes::all();
-
+        
         return view('choferes.index',compact('choferes'));
     }
 
@@ -134,7 +134,7 @@ class ChoferesController extends Controller
     {
         $chofer = Choferes::find($id_chofer);
 
-        $camiones=Camiones::all();
+        $camiones=Camiones::where('status','Activo')->get();
 
         $asignaciones=Asignaciones::all();
 
