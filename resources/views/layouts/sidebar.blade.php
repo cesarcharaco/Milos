@@ -38,13 +38,8 @@
                         <a href="widgets.html"> <i class="menu-icon ti-email"></i>Widgets </a>
                     </li>
                     <li class="menu-title">Extras</li><!-- /.menu-title -->
-                    <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-glass"></i>Pages</a>
-                        <ul class="sub-menu children dropdown-menu">
-                            <li><i class="menu-icon fa fa-sign-in"></i><a href="page-login.html">Login</a></li>
-                            <li><i class="menu-icon fa fa-sign-in"></i><a href="page-register.html">Register</a></li>
-                            <li><i class="menu-icon fa fa-paper-plane"></i><a href="pages-forget.html">Forget Pass</a></li>
-                        </ul>
+                    <li>
+                        <a href="{{ route('users.index') }}"> <i class="menu-icon ti-user"></i>Usuarios </a>
                     </li>
                 </ul>
             </div><!-- /.navbar-collapse -->
