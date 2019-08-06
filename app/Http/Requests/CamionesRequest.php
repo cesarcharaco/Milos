@@ -32,8 +32,17 @@ class CamionesRequest extends FormRequest
         ];
     }
 
-    public function FunctionName($value='')
+    public function messages()
     {
-        # code...
+        return [
+            'modelo.required' => 'El Modelo es obligatorio',
+            'marca.required' => 'La Marca es obligatoria',
+            'vin.required' => 'El VIN es obligatorio',
+            'vin.unique' => 'El VIN ya se encuentra registrado',
+            'anio.required' => 'El Año es obligatorio',
+            'anio.numeric' => 'El Año sólo debe contener números',
+            'capacidad.required' => 'La Capacidad es obligatoria',
+            'capacidad.numeric' => 'La Capacidad sólo debe contener números'
+        ];
     }
 }
