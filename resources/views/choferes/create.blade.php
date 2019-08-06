@@ -15,8 +15,8 @@
                         <div class="page-header float-right">
                             <div class="page-title">
                                 <ol class="breadcrumb text-right">
-                                    <li><a href="{{ route('users.index') }}">Usuarios</a></li>
-                                    <li class="active">Registrar usuario</li>
+                                    <li><a href="{{ route('choferes.index') }}">Camiones</a></li>
+                                    <li class="active">Registrar conductor</li>
                                 </ol>
                             </div>
                         </div>
@@ -33,44 +33,73 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <strong>Registro de usuario</strong> <small>Todos los campos (<b style="color:red;">*</b>) son requeridos.</small>
+                                <strong>Registro de conductor</strong> <small>Todos los campos (<b style="color:red;">*</b>) son requeridos.</small>
                             </div>
                             <div class="card-body card-block">
-                                <form action="{{ route('users.update',$user->id) }}" method="PUT" class="form-horizontal">
+                                <form action="{{ route('choferes.store') }}" method="POST" class="form-horizontal">
                                     @csrf
                                     <div class="row form-group">
                                         <div class="col col-md-3">
-                                            <label for="name" class=" form-control-label"><b style="color: red;">*</b> Nombre</label>
+                                            <label for="nombres" class=" form-control-label"><b style="color: red;">*</b> Nombre</label>
                                         </div>
                                         <div class="col-12 col-md-9">
-                                            <input type="email" id="name" name="name" placeholder="Ingrese nombre..." class="form-control" value="{{ $user->name }}">
+                                            <input type="text" id="nombres" name="nombres" placeholder="Ingrese nombres..." class="form-control">
                                         </div>
                                     </div>
                                     <div class="row form-group">
                                         <div class="col col-md-3">
-                                            <label for="email" class=" form-control-label"><b style="color: red;">*</b> Email</label>
+                                            <label for="apellidos" class=" form-control-label"><b style="color: red;">*</b> Apellidos</label>
                                         </div>
                                         <div class="col-12 col-md-9">
-                                            <input type="email" id="email" name="email" placeholder="Ingrese Email..." class="form-control" value="{{ $user->email }}">
+                                            <input type="text" id="apellidos" name="apellidos" placeholder="Ingrese apellidos..." class="form-control">
                                         </div>
                                     </div>
                                     <div class="row form-group">
                                         <div class="col col-md-3">
-                                            <label for="password" class=" form-control-label"><b style="color: red;">*</b> Password</label>
+                                            <label for="rut" class=" form-control-label"><b style="color: red;">*</b> Rut</label>
                                         </div>
                                         <div class="col-12 col-md-9">
-                                            <input type="password" id="password" name="password" placeholder="Ingrese contraseña..." class="form-control">
+                                            <input type="text" id="rut" name="rut" placeholder="Ingrese rut..." class="form-control">
                                         </div>
                                     </div>
                                     <div class="row form-group">
                                         <div class="col col-md-3">
-                                            <label for="user_type" class=" form-control-label"><b style="color: red;">*</b> Tipo de usuario</label>
+                                            <label for="edad" class=" form-control-label"><b style="color: red;">*</b> Edad</label>
                                         </div>
                                         <div class="col-12 col-md-9">
-                                            <select class="form-control" name="user_type" id="user_type">
-                                                <option value="Admin" @if($user->user_type=="Admin") selected="selected" @endif>Admin</option>
-                                                <option value="Despachador" @if($user->user_type=="Despachador") selected="selected" @endif>Despachador</option>
-                                                <option value="Receptor" @if($user->user_type=="Receptor") selected="selected" @endif>Receptor</option>
+                                            <input type="text" id="edad" name="edad" placeholder="Ingrese edad..." class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col col-md-3">
+                                            <label for="genero" class=" form-control-label"><b style="color: red;">*</b> Género</label>
+                                        </div>
+                                        <div class="col-12 col-md-9">
+                                            <select class="form-control" name="genero" id="genero">
+                                                <option value="Masculino">Masculino</option>
+                                                <option value="Femenino">Femenino</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col col-md-3">
+                                            <label for="licencia" class=" form-control-label"><b style="color: red;">*</b> Licencia</label>
+                                        </div>
+                                        <div class="col-12 col-md-9">
+                                            <select class="form-control" name="licencia" id="licencia">
+                                                <option value="Si">Si</option>
+                                                <option value="No">No</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col col-md-3">
+                                            <label for="certificado" class=" form-control-label"><b style="color: red;">*</b> Certificado</label>
+                                        </div>
+                                        <div class="col-12 col-md-9">
+                                            <select class="form-control" name="certificado" id="certificado">
+                                                <option value="Si">Si</option>
+                                                <option value="No">No</option>
                                             </select>
                                         </div>
                                     </div>
@@ -80,8 +109,9 @@
                                         </div>
                                         <div class="col-12 col-md-9">
                                             <select class="form-control" name="status" id="status">
-                                                <option value="Activo" @if($user->status=="Activo") selected="selected" @endif>Activo</option>
-                                                <option value="Inactivo" @if($user->status=="Inactivo") selected="selected" @endif>Inactivo</option>
+                                                <option value="Activo">Activo</option>
+                                                <option value="Reposo">Reposo</option>
+                                                <option value="Retirado">Retirado</option>
                                             </select>
                                         </div>
                                     </div>
