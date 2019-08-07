@@ -75,13 +75,13 @@
                                             <td>{{ $key->status }}</td>
                                             <td align="center">
                                                 @if(buscar_asignacion($key->id)=="No" and $key->status=="Activo")
-                                                    <a href="{{ route('choferes.asignar',$key->id) }}" title="Asignar Camión" class="btn btn-info btn-sm"><i class="fa fa-send"></i>&nbsp; </a>
+                                                    <a href="{{ route('choferes.asignar',$key->id) }}" title="Asignar Camión" class="btn btn-info btn-sm"><i class="fa fa-truck"></i>&nbsp; </a>
                                                 @elseif(buscar_asignacion($key->id)!=="No" and $key->status=="Activo")
                                                     <a href="{{ route('choferes.retirar',$key->id) }}" title="Retirar Camión" class="btn btn-info btn-sm"><i class="fa fa-times"></i>&nbsp; </a>
                                                 @endif
                                                 <a href="{{ route('choferes.edit',$key->id) }}" title="Actualizar Conductor" class="btn btn-info btn-sm"><i class="fa fa-edit"></i>&nbsp; </a>
                                                 <a href="#" title="Eliminar Conductor" class="btn btn-danger btn-sm"><i class="fa fa-trash" onclick="eliminar('{{ $key->id }}')" data-toggle="modal" data-target="#modalEliminar"></i>&nbsp; </a>
-                                                <a href="#" title="Cambiar Status Conductor" class="btn btn-success btn-sm"><i class="fa fa-lock" onclick="cambiar_status('{{ $key->id }}')" data-toggle="modal" data-target="#modalCambiarStatus"></i>&nbsp; </a>
+                                                <a href="#" title="Cambiar Status Conductor" class="btn btn-success btn-sm"><i class="fa fa-exchange" onclick="cambiar_status('{{ $key->id }}')" data-toggle="modal" data-target="#modalCambiarStatus"></i>&nbsp; </a>
                                             </td>
                                         </tr>
                                         @endforeach
