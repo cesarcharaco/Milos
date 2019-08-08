@@ -5,7 +5,7 @@
 <!--[if gt IE 8]><!--> 
 <html class="no-js" lang="es"> <!--<![endif]-->
 <head>
-    @yield('title')
+    <title>MILOS - Minning Logistic System</title>
 
     @include('layouts.css')
     

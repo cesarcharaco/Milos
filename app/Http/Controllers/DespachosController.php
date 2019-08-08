@@ -14,7 +14,14 @@ class DespachosController extends Controller
      */
     public function index()
     {
-        //
+        $hoy=date('Y-m-d');
+
+        //dd($hoy);
+        $despachos=Despachos::where('fecha',$hoy)->get();
+        //dd($despachos);
+        return view('despachos.index',compact('despachos'));
+
+
     }
 
     /**

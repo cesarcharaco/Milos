@@ -146,7 +146,7 @@
                     <label for="certificado" class=" form-control-label"> Status</label>
                 </div>
                 <div class="col-12 col-md-9">
-                    <select class="form-control" name="certificado" id="certificado">
+                    <select class="form-control" name="status" id="status">
                         <option value="Activo">Activo</option>
                         <option value="Reposo">Reposo</option>
                         <option value="Retirado">Retirado</option>

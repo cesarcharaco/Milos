@@ -120,12 +120,19 @@ class ChoferesController extends Controller
 
     public function cambiar_status(Request $request)
     {
+        //dd($request->all());
         $chofer=Choferes::find($request->id_chofer);
 
         $chofer->status=$request->status;
-        $request->save();
-
-        flash('<i class="icon-circle-check"></i> El Status del Conductor ha sido cambiado '.$request->status.' satisfactoriamente!')->success()->important();
+        $chofer->save();
+        if ($request->status!=="Activo") {
+            $buscar=Asignaciones::where('id_chofer',$request->id_chofer)->where('status','Asignado')->first();
+            if (!empty($buscar)) {
+                $buscar->status='Retirado';
+            $buscar->save();
+            }
+        }
+        flash('<i class="icon-circle-check"></i> El Status del Conductor ha sido cambiado a '.$request->status.' satisfactoriamente!')->success()->important();
         return redirect()->to('choferes');
 
     }

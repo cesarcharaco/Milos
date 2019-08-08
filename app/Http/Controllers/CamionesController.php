@@ -6,6 +6,7 @@ use App\Camiones;
 use Illuminate\Http\Request;
 use App\Http\Requests\CamionesRequest;
 use App\Http\Requests\CamionesUpdateRequest;
+use App\Asignaciones;
 class CamionesController extends Controller
 {
     /**
@@ -111,8 +112,26 @@ class CamionesController extends Controller
             flash('<i class="icon-circle-check"></i> Registro eliminado satisfactoriamente!')->success()->important();
             return redirect()->to('camiones');
         } else {
-            flash('<i class="icon-circle-check"></i> No se udo eliminar al Conductor!')->success()->important();
+            flash('<i class="icon-circle-check"></i> No se udo eliminar al Conductor!')->warning()->important();
             return redirect()->to('camiones');
         }
+    }
+
+    public function cambiar_status(Request $request)
+    {
+        //dd($request->all());
+        $camion=Camiones::find($request->id_camion);
+
+        $camion->status=$request->status;
+        $camion->save();
+        if ($request->status!=="Activo") {
+            $buscar=Asignaciones::where('id_camion',$request->id_camion)->where('status','Asignado')->first();
+            $buscar->status='Retirado';
+            $buscar->save();
+
+        }
+
+        flash('<i class="icon-circle-check"></i> Ha sido cambiado el Status del Camión a '.$request->status.'!')->success()->important();
+            return redirect()->to('camiones');
     }
 }
