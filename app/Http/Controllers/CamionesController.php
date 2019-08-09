@@ -112,7 +112,7 @@ class CamionesController extends Controller
             flash('<i class="icon-circle-check"></i> Registro eliminado satisfactoriamente!')->success()->important();
             return redirect()->to('camiones');
         } else {
-            flash('<i class="icon-circle-check"></i> No se udo eliminar al Conductor!')->warning()->important();
+            flash('<i class="icon-circle-check"></i> No se pudo eliminar al Conductor!')->warning()->important();
             return redirect()->to('camiones');
         }
     }

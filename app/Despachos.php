@@ -8,7 +8,7 @@ class Despachos extends Model
 {
     protected $table='despachos';
 
-    protected $fillable=['num_guia','patente','id_chofer','kg_pesaje','hora_salida','total_kg_salida','observaciones'];
+    protected $fillable=['num_guia','patente','id_chofer','kg_pesaje','hora_salida','total_kg_salida','observaciones','fecha','status'];
 
     public function chofer()
     {

@@ -27,6 +27,7 @@ Route::group(['middleware' => ['auth', 'web']], function () {
 	Route::post('camiones/cambiar','CamionesController@cambiar_status')->name('camiones.cambiar');
 	Route::resource('camiones','CamionesController');
 	Route::resource('despachos','DespachosController');
+	Route::post('despachos/cambiar','DespachosController@cambiar_status')->name('despachos.cambiar');
 	Route::resource('recepciones','RecepcionesController');
 
 });

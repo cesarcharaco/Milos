@@ -16,10 +16,10 @@
                         <a href="{{ route('camiones.index') }}"> <i class="menu-icon ti-truck"></i>Registros </a>
                     </li>
                     <li>
-                        <a href="#"> <i class="menu-icon ti-shift-left"></i>Llegada de Camiones </a>
+                        <a href="{{ route('despachos.index') }}"> <i class="menu-icon ti-shift-right"></i>Despachos de Camiones </a>
                     </li>
                     <li>
-                        <a href="#"> <i class="menu-icon ti-shift-right"></i>Salida de Camiones </a>
+                        <a href="#"> <i class="menu-icon ti-shift-left"></i>Llegada de Camiones </a>
                     </li>
                     @if(\Auth::getUser()->user_type=="Admin")
                     <li class="menu-title">Configuraciones</li><!-- /.menu-title -->

@@ -15,7 +15,7 @@
                         <div class="page-header float-right">
                             <div class="page-title">
                                 <ol class="breadcrumb text-right">
-                                    <li><a href="#">Conductores</a></li>
+                                    <li><a href="#">Despacho de Camiones</a></li>
                                 </ol>
                             </div>
                         </div>
@@ -46,42 +46,40 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <strong class="card-title">Listado de Conductores</strong>
-                                <a href="{{ route('choferes.create') }}" class="btn btn-primary btn-sm pull-right"><i class="fa fa-star"></i>&nbsp; Registrar Conductor</a>
+                                <strong class="card-title">Listado de Despachos de Camiones de Hoy</strong>
+                                <a href="{{ route('despachos.create') }}" class="btn btn-primary btn-sm pull-right"><i class="fa fa-star"></i>&nbsp; Registrar Despacho de Camión de hoy</a>
                             </div>
                             <div class="card-body">
                                 <table id="bootstrap-data-table" class="table table-striped table-bordered">
                                     <thead>
                                         <tr>
-                                            <th>Nombres</th>
-                                            <th>Apellidos</th>
-                                            <th>Rut</th>
-                                            <th>Edad</th>
-                                            <th>licencia</th>
-                                            <th>Certificado</th>
+                                            <th>Nro. Guía</th>
+                                            <th>Patente</th>
+                                            <th>Chofer</th>
+                                            <th>Kg Pesaje</th>
+                                            <th>Hora de Salida</th>
+                                            <th>Total Kgs de Salida</th>
+                                            <th>Observaciones</th>
                                             <th>Status</th>
                                             <th>Opciones</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach($choferes as $key)
+                                        @foreach($despachos as $key)
                                         <tr>
-                                            <td>{{ $key->nombres }}</td>
-                                            <td>{{ $key->apellidos }}</td>
-                                            <td>{{ $key->rut }}</td>
-                                            <td>{{ $key->edad }}</td>
-                                            <td>{{ $key->licencia }}</td>
-                                            <td>{{ $key->certificado }}</td>
+                                            <td>{{ $key->num_guia }}</td>
+                                            <td>{{ $key->patente }}</td>
+                                            <td>{{ $key->chofer->apellidos }}, {{ $key->chofer->nombres }} - RUT: {{ $key->chofer->rut }}</td>
+                                            <td>{{ $key->kg_pesaje }}</td>
+                                            <td>{{ $key->hora_salida }}</td>
+                                            <td>{{ $key->total_kg_salida }}</td>
+                                            <td>{{ $key->observaciones }}</td>
                                             <td>{{ $key->status }}</td>
                                             <td align="center">
-                                                @if(buscar_asignacion($key->id)=="No" and $key->status=="Activo")
-                                                    <a href="{{ route('choferes.asignar',$key->id) }}" title="Asignar Camión" class="btn btn-info btn-sm"><i class="fa fa-send"></i>&nbsp; </a>
-                                                @elseif(buscar_asignacion($key->id)!=="No" and $key->status=="Activo")
-                                                    <a href="{{ route('choferes.retirar',$key->id) }}" title="Retirar Camión" class="btn btn-info btn-sm"><i class="fa fa-times"></i>&nbsp; </a>
-                                                @endif
-                                                <a href="{{ route('choferes.edit',$key->id) }}" title="Actualizar Conductor" class="btn btn-info btn-sm"><i class="fa fa-edit"></i>&nbsp; </a>
-                                                <a href="#" title="Eliminar Conductor" class="btn btn-danger btn-sm"><i class="fa fa-trash" onclick="eliminar('{{ $key->id }}')" data-toggle="modal" data-target="#modalEliminar"></i>&nbsp; </a>
-                                                <a href="#" title="Cambiar Status Conductor" class="btn btn-success btn-sm"><i class="fa fa-lock" onclick="cambiar_status('{{ $key->id }}')" data-toggle="modal" data-target="#modalCambiarStatus"></i>&nbsp; </a>
+                                                
+                                                <a href="{{ route('despachos.edit',$key->id) }}" title="Actualizar Despacho" class="btn btn-info btn-sm"><i class="fa fa-edit"></i>&nbsp; </a>
+                                                <a href="#" title="Elimiar Despacho" class="btn btn-danger btn-sm"><i class="fa fa-trash" onclick="eliminar('{{ $key->id }}')" data-toggle="modal" data-target="#modalEliminar"></i>&nbsp; </a>
+                                                <a href="#" title="Cambiar Status Despacho" class="btn btn-success btn-sm"><i class="fa fa-lock" onclick="cambiar_status('{{ $key->id }}','{{ $key->status }}')" data-toggle="modal" data-target="#modalCambiarStatus"></i>&nbsp; </a>
                                             </td>
                                         </tr>
                                         @endforeach
@@ -101,7 +99,7 @@
     <div class="modal-dialog modal-sm" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="smallLabel">Eliminar Conductor</h5>
+                <h5 class="modal-title" id="smallLabel">Eliminar Despacho</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -110,9 +108,9 @@
                 <p>
                     ¿Está seguro de eliminar éste registro?
                 </p>
-                 {!! Form::open(['route' => ['choferes.destroy',1033], 'method' => 'DELETE']) !!}
+                 {!! Form::open(['route' => ['despachos.destroy',1033], 'method' => 'DELETE']) !!}
                 @csrf
-             <input type="hidden" name="id_chofer" id="id_chofer">       
+             <input type="hidden" name="id_despacho" id="id_despacho">       
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
@@ -126,10 +124,10 @@
 
 <!-- MOdal para cambiar status -->
 <div class="modal fade" id="modalCambiarStatus" tabindex="-1" role="dialog" aria-labelledby="smallLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-dialog modal-sm" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="smallLabel">Cambiar Status de Conductor</h5>
+                <h5 class="modal-title" id="smallLabel">Cambiar Status de Despacho</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -138,21 +136,14 @@
                 <p>
                     ¿Está seguro de cambiar el status?
                 </p>
-                 {!! Form::open(['route' => ['choferes.cambiar'], 'method' => 'POST']) !!}
+                 {!! Form::open(['route' => ['despachos.cambiar'], 'method' => 'POST']) !!}
                 @csrf
-             <input type="hidden" name="id_chofer" id="id_chofer2">
+             <input type="hidden" name="id_despacho" id="id_despacho2">
              <div class="row form-group">
-                <div class="col col-md-3">
-                    <label for="status" class=" form-control-label"> Status</label>
+                <div class="col col-md-12">
+                    <b>Cambiar Status a </b><span id="nuevo_status"></span>
                 </div>
-                <div class="col-12 col-md-9">
-                    <select class="form-control" name="status" id="status">
-                        <option value="Activo">Activo</option>
-                        <option value="Reposo">Reposo</option>
-                        <option value="Retirado">Retirado</option>
-                    </select>
-                    <small>Es obligatorio seleccionar un status</small>
-                </div>
+                <input type="hidden" name="status" id="status">
             </div>       
             </div>
             <div class="modal-footer">
@@ -167,12 +158,21 @@
 @endsection
 @section('scripts')
 <script type="text/javascript">
-    function eliminar(id_chofer) {
-        $("#id_chofer").val(id_chofer);
+    function eliminar(id_despacho) {
+        $("#id_despacho").val(id_despacho);
     }
 
-    function cambiar_status(id_chofer) {
-        $("#id_chofer2").val(id_chofer);
+    function cambiar_status(id_despacho,status_actual) {
+        $("#id_despacho2").val(id_despacho);
+        if (status_actual=="Realizado") {
+            $("#nuevo_status").text("Cancelado");
+            $("#nuevo_status").css('color','red');
+            $("#status").val('Cancelado');
+        }else{
+            $("#nuevo_status").text("Realizado");
+            $("#nuevo_status").css('color','green');
+            $("#status").val('Realizado');
+        }
     }
 </script>
 @endsection

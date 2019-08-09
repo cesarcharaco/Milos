@@ -23,6 +23,7 @@ class CreateDespachosTable extends Migration
             $table->string('total_kg_salida');
             $table->text('observaciones')->nullable();
             $table->date('fecha');
+            $table->enum('status',['Realizado','Cancelado'])->default('Realizado');
 
             $table->foreign('id_chofer')->references('id')->on('choferes')->onDelete('cascade');
             $table->timestamps();

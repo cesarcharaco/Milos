@@ -4,7 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Despachos;
 use Illuminate\Http\Request;
-
+use App\Choferes;
+use App\Asignaciones;
+use App\Http\Requests\DespachosRequest;
+date_default_timezone_set("America/Caracas");
+ini_set('date.timezone','America/Caracas');
+/*
+date_default_timezone_set("America/Santiago");
+ini_set('date.timezone','America/Santiago');
+*/
 class DespachosController extends Controller
 {
     /**
@@ -31,7 +39,10 @@ class DespachosController extends Controller
      */
     public function create()
     {
-        //
+        $choferes=Asignaciones::where('status','Asignado')->get();
+        $hora=date('H:i:s');
+        $despachos=Despachos::where('fecha',date('Y-m-d'))->get();
+        return view('despachos.create',compact('choferes','hora','despachos'));
     }
 
     /**
@@ -40,9 +51,14 @@ class DespachosController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(DespachosRequest $request)
     {
-        //
+        $despacho=new Despachos();
+        $despacho->fecha=date('Y-m-d');
+        $despacho->fill($request->except('fecha'))->save();
+
+        flash('<i class="icon-circle-check"></i> Despacho registrado satisfactoriamente!')->success()->important();
+        return redirect()->to('despachos');
     }
 
     /**
@@ -62,9 +78,13 @@ class DespachosController extends Controller
      * @param  \App\Despachos  $despachos
      * @return \Illuminate\Http\Response
      */
-    public function edit(Despachos $despachos)
+    public function edit($id)
     {
-        //
+        $despacho=Despachos::find($id);
+        $choferes=Asignaciones::where('status','Asignado')->get();
+        $hora=date('H:i:s');
+        $despachos=Despachos::where('fecha',date('Y-m-d'))->get();
+        return view('despachos.edit',compact('despacho','choferes','hora','despachos'));
     }
 
     /**
@@ -74,9 +94,14 @@ class DespachosController extends Controller
      * @param  \App\Despachos  $despachos
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Despachos $despachos)
+    public function update(DespachosRequest $request,$id)
     {
-        //
+        $despacho=Despachos::find($id);
+        
+        $despacho->fill($request->except('fecha'))->save();
+
+        flash('<i class="icon-circle-check"></i> Despacho actualizado satisfactoriamente!')->success()->important();
+        return redirect()->to('despachos');
     }
 
     /**
@@ -85,8 +110,27 @@ class DespachosController extends Controller
      * @param  \App\Despachos  $despachos
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Despachos $despachos)
+    public function destroy(Request $request)
     {
-        //
+        $despacho=Despachos::find($request->id_despacho);
+
+        if ($despacho->delete()) {
+            flash('<i class="icon-circle-check"></i> Registro eliminado satisfactoriamente!')->success()->important();
+            return redirect()->to('camiones');
+        } else {
+            flash('<i class="icon-circle-check"></i> No se pudo eliminar al Conductor!')->warning()->important();
+            return redirect()->to('camiones');
+        }
+    }
+
+    public function cambiar_status(Request $request)
+    {
+        $despacho=Despachos::find($request->id_despacho);
+
+        $despacho->status=$request->status;
+        $despacho->save();
+
+        flash('<i class="icon-circle-check"></i>Status de Despacho cambiado a <b>'.$request->status.'</b>  satisfactoriamente!')->success()->important();
+        return redirect()->to('despachos');
     }
 }

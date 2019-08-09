@@ -112,7 +112,7 @@ class ChoferesController extends Controller
             flash('<i class="icon-circle-check"></i> Registro eliminado satisfactoriamente!')->success()->important();
             return redirect()->to('choferes');
         } else {
-            flash('<i class="icon-circle-check"></i> No se udo eliminar al Conductor!')->success()->important();
+            flash('<i class="icon-circle-check"></i> No se pudo eliminar al Conductor!')->success()->important();
             return redirect()->to('choferes');
         }
         
