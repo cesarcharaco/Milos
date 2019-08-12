@@ -23,3 +23,10 @@ function buscar_camion($id_camion)
 	} 
 	return $encontrado;	
 }
+
+function despachos()
+{
+	$hoy=date('Y-m-d');
+	$despachos=App\Despachos::where('fecha',$hoy)->get();
+	 return $despachos;
+}

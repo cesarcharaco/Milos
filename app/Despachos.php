@@ -17,6 +17,6 @@ class Despachos extends Model
 
     public function recepciones()
     {
-    	return $this->hasMany('App\Recepciones','id_despacho','id');
+    	return $this->hasOne('App\Recepciones','id_despacho','id');
     }
 }

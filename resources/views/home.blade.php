@@ -104,6 +104,7 @@
                 <!-- /Widgets -->
                 <div class="clearfix"></div>
                 <!-- Orders -->
+                @php $despachos1=despachos(); @endphp
                 <div class="orders">
                     <div class="row">
                         <div class="col-xl-12">
@@ -122,7 +123,8 @@
                                                     <th>Kg pesaje</th>
                                                     <th>Hora de salida</th>
                                                     <th>Total Kgs de salidad</th>
-                                                    <th>Status</th>
+                                                    <th>Status de Despacho</th>
+                                                    <th>Status de Recepción</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -140,6 +142,9 @@
                                                         @else
                                                             <span class="badge badge-pending">{{ $key->status }}</span>
                                                         @endif
+                                                    </td>
+                                                    <td>
+                                                        {{ $key->recepciones->status }}
                                                     </td>
                                                 </tr>
                                                 @endforeach

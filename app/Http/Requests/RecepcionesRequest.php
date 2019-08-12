@@ -13,7 +13,7 @@ class RecepcionesRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,20 @@ class RecepcionesRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'kg_pesaje' => 'required|numeric',
+            'hora_llegada' => 'required',
+            'total_kg_entrega' => 'required|numeric'
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'kg_pesaje.required' => 'El Pesaje es obligatorio',
+            'kg_pesaje.numeric' => 'El Pesaje sólo debe contener números',
+            'hora_llegada.required' => 'Debe marcar la Hora de Llegada',
+            'total_kg_entrega.required' => 'Debe Ingresar los Kgs totales de Llegada',
+            'total_kg_entrega.numeric' => 'Los Kgs totales de Llegada sólo deben contener números'
         ];
     }
 }

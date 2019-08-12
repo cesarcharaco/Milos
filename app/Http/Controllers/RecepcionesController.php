@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Recepciones;
+use App\Despachos;
 use Illuminate\Http\Request;
-
+use App\Http\Requests\RecepcionesRequest;
+date_default_timezone_set("America/Caracas");
+ini_set('date.timezone','America/Caracas');
 class RecepcionesController extends Controller
 {
     /**
@@ -14,7 +17,10 @@ class RecepcionesController extends Controller
      */
     public function index()
     {
-        //
+        $hoy=date('Y-m-d');
+        $despachos= Despachos::where('fecha',$hoy)->get();
+
+        return view('recepciones.index',compact('despachos'));
     }
 
     /**
@@ -55,9 +61,12 @@ class RecepcionesController extends Controller
      * @param  \App\Recepciones  $recepciones
      * @return \Illuminate\Http\Response
      */
-    public function edit(Recepciones $recepciones)
+    public function edit($id)
     {
-        //
+        $despacho=Despachos::find($id);
+        $hora=date('H:i:s');
+
+        return view('recepciones.edit',compact('despacho','hora'));
     }
 
     /**
@@ -67,9 +76,18 @@ class RecepcionesController extends Controller
      * @param  \App\Recepciones  $recepciones
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Recepciones $recepciones)
+    public function update(RecepcionesRequest $request,$id)
     {
-        //
+        $recepcion=Recepciones::where('id_despacho',$id)->first();
+
+        $recepcion->kg_pesaje=$request->kg_pesaje;
+        $recepcion->hora_llegada=$request->hora_llegada;
+        $recepcion->total_kg_entrega=$request->total_kg_entrega;
+        $recepcion->status=$request->status;
+        $recepcion->save();
+
+        flash('<i class="icon-circle-check"></i> Recepción registrada satisfactoriamente!')->success()->important();
+        return redirect()->to('recepciones');  
     }
 
     /**

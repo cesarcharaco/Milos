@@ -21,6 +21,7 @@ class CreateRecepcionesTable extends Migration
             $table->string('hora_llegada')->nullable();
             $table->string('total_kg_entrega')->nullable();
             $table->text('observaciones')->nullable();
+            $table->enum('status',['No ha Llegado','Recibido','Cancelado','Devuelto'])->default('No ha Llegado');
             
             $table->foreign('id_despacho')->references('id')->on('despachos')->onDelete('cascade');
             $table->timestamps();

@@ -19,7 +19,7 @@
                         <a href="{{ route('despachos.index') }}"> <i class="menu-icon ti-shift-right"></i>Despachos de Camiones </a>
                     </li>
                     <li>
-                        <a href="#"> <i class="menu-icon ti-shift-left"></i>Llegada de Camiones </a>
+                        <a href="{{ route('recepciones.index') }}"> <i class="menu-icon ti-shift-left"></i>Llegada de Camiones </a>
                     </li>
                     @if(\Auth::getUser()->user_type=="Admin")
                     <li class="menu-title">Configuraciones</li><!-- /.menu-title -->

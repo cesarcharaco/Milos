@@ -6,6 +6,7 @@ use App\Despachos;
 use Illuminate\Http\Request;
 use App\Choferes;
 use App\Asignaciones;
+use App\Recepciones;
 use App\Http\Requests\DespachosRequest;
 date_default_timezone_set("America/Caracas");
 ini_set('date.timezone','America/Caracas');
@@ -56,7 +57,9 @@ class DespachosController extends Controller
         $despacho=new Despachos();
         $despacho->fecha=date('Y-m-d');
         $despacho->fill($request->except('fecha'))->save();
-
+        $recepcion=new Recepciones();
+        $recepcion->id_despacho=$despacho->id;
+        $recepcion->save();
         flash('<i class="icon-circle-check"></i> Despacho registrado satisfactoriamente!')->success()->important();
         return redirect()->to('despachos');
     }
