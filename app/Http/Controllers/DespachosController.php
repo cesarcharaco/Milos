@@ -116,10 +116,10 @@ class DespachosController extends Controller
 
         if ($despacho->delete()) {
             flash('<i class="icon-circle-check"></i> Registro eliminado satisfactoriamente!')->success()->important();
-            return redirect()->to('camiones');
+            return redirect()->to('despachos');
         } else {
             flash('<i class="icon-circle-check"></i> No se pudo eliminar al Conductor!')->warning()->important();
-            return redirect()->to('camiones');
+            return redirect()->to('despachos');
         }
     }
 
