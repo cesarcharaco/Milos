@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="apple-touch-icon" href="https://i.imgur.com/QRAUqs9.png">
-    <link rel="shortcut icon" href="{{ asset('images/logo.png') }}">
+    <link rel="shortcut icon" href="{{ asset('images/ML_(ICO).png') }}">
 
     <link rel="stylesheet" href="{{ asset('ElaAdmin/assets/css/normalize.min.css') }}">
     <link rel="stylesheet" href="{{ asset('ElaAdmin/assets/css/bootstrap.min.css') }}">

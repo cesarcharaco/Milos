@@ -12,7 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="apple-touch-icon" href="https://i.imgur.com/QRAUqs9.png">
-    <link rel="shortcut icon" href="{{ asset('images/logo.png') }}">
+    <link rel="shortcut icon" href="{{ asset('images/ML_(ICO).png') }}">
 
     <link rel="stylesheet" href="{{ asset('ElaAdmin/assets/css/normalize.min.css') }}">
     <link rel="stylesheet" href="{{ asset('ElaAdmin/assets/css/bootstrap.min.css') }}">
@@ -27,14 +27,14 @@
 
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 </head>
-<body class="bg-dark">
+<body class="bg-dark" style="background: gainsboro !important; ">
 
     <div class="sufee-login d-flex align-content-center flex-wrap">
         <div class="container">
             <div class="login-content">
                 <div class="login-logo">
                     <a href="index.html">
-                        <img class="align-content" src="{{ asset('images/logo.png') }}" alt="" width="300px" height="250px">
+                        <img class="align-content" src="{{ asset('images/ML_(THUM)_2.png') }}" alt="" >
                     </a>
                 </div>
                 <div class="login-form">
