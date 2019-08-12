@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Choferes;
 use App\Camiones;
 use App\Despachos;
-use App\User;
+use App\Recepciones;
 
 class HomeController extends Controller
 {
@@ -36,11 +36,12 @@ class HomeController extends Controller
         $despachos=Despachos::all();
         $total_despachos=count($despachos);
 
-        $usuarios=User::all();
-        $total_usuarios=count($usuarios);
+        $recepciones=Recepciones::all();
+        $total_recepciones=count($recepciones);
+        
         $hoy=date('Y-m-d');
         $despachos1=Despachos::where('fecha',$hoy)->get();
 
-        return view('home',compact('total_conductores','total_camiones','total_despachos','total_usuarios','despachos1'));
+        return view('home',compact('total_conductores','total_camiones','total_despachos','total_recepciones','despachos1'));
     }
 }

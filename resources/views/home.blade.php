@@ -88,12 +88,12 @@
                             <div class="card-body">
                                 <div class="stat-widget-five">
                                     <div class="stat-icon dib flat-color-4">
-                                        <i class="pe-7s-users"></i>
+                                        <i class="pe-7s-note2"></i>
                                     </div>
                                     <div class="stat-content">
                                         <div class="text-left dib">
-                                            <div class="stat-text"><span class="count">{{$total_usuarios}}</span></div>
-                                            <div class="stat-heading">Usuarios</div>
+                                            <div class="stat-text"><span class="count">{{$total_recepciones}}</span></div>
+                                            <div class="stat-heading">Recepciones</div>
                                         </div>
                                     </div>
                                 </div>
@@ -109,7 +109,7 @@
                         <div class="col-xl-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <h4 class="box-title">Orders </h4>
+                                    <h4 class="box-title">Despachos y Entregas </h4>
                                 </div>
                                 <div class="card-body--">
                                     <div class="table-stats order-table ov-h">
