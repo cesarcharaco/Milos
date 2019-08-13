@@ -42,6 +42,22 @@ class HomeController extends Controller
         $hoy=date('Y-m-d');
         $despachos1=Despachos::where('fecha',$hoy)->get();
 
-        return view('home',compact('total_conductores','total_camiones','total_despachos','total_recepciones','despachos1'));
+        $despacho_r=Despachos::where('status','Realizado')->count();
+        $despacho_c=Despachos::where('status','Cancelado')->count();
+        $chartjs = app()->chartjs
+        ->name('pieChartTest')
+        ->type('pie')
+        ->size(['width' => 400, 'height' => 200])
+        ->labels(['Realizado', 'Cancelado'])
+        ->datasets([
+            [
+                'backgroundColor' => ['#36A2EB','#FF6384'],
+                'hoverBackgroundColor' => ['#36A2EB','#FF6384'],
+                'data' => [$despacho_r, $despacho_c]
+            ]
+        ])
+        ->options([]);
+
+        return view('home',compact('total_conductores','total_camiones','total_despachos','total_recepciones','despachos1','chartjs'));
     }
 }
