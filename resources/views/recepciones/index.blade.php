@@ -87,7 +87,7 @@
                                             </td>
                                             <td align="center">
                                                  
-                                                <a href="{{ route('recepciones.edit',$key->id) }}" title="Registrar Recepción" class="btn btn-info btn-sm"><i class="fa fa-edit"></i>&nbsp; </a>
+                                                <a href="{{ route('recepciones.edit',$key->id) }}" title="Registrar Recepción" class="btn btn-info btn-sm"><i class="fa fa-save"></i>&nbsp; </a>
                                                 {{--<a href="#" title="Elimiar Despacho" class="btn btn-danger btn-sm"><i class="fa fa-trash" onclick="eliminar('{{ $key->id }}')" data-toggle="modal" data-target="#modalEliminar"></i>&nbsp; </a>
                                                 <a href="#" title="Cambiar Status Despacho" class="btn btn-success btn-sm"><i class="fa fa-lock" onclick="cambiar_status('{{ $key->id }}','{{ $key->status }}')" data-toggle="modal" data-target="#modalCambiarStatus"></i>&nbsp; </a> --}}
                                             </td>
