@@ -45,6 +45,27 @@ class HomeController extends Controller
         $despacho_r=Despachos::where([['fecha',$hoy],['status','Realizado']])->count();
         $despacho_c=Despachos::where([['fecha',$hoy],['status','Cancelado']])->count();
 
+        $no_llegado=0;
+        $recibido=0;
+        $cancelado=0;
+        $devuelto=0;
+        foreach ($despachos1 as $key) {
+            switch ($key->recepciones->status) {
+                case 'No ha Llegado':
+                    $no_llegado++;
+                    break;
+                case 'Recibido':
+                    $recibido++;
+                    break;
+                case 'Cancelado':
+                    $cancelado++;
+                    break;
+                case 'Devuelto':
+                    $devuelto++;
+                    break;
+            }
+        }
+
         $chartjs = app()->chartjs
         ->name('barChartTest')
         ->type('bar')
@@ -52,14 +73,34 @@ class HomeController extends Controller
         ->labels(['Gráfica de despachos'])
         ->datasets([
             [
-                "label" => "Realizado",
+                "label" => "Desp. Realizado",
                 'backgroundColor' => ['rgba(54, 162, 235, 0.2)'],
                 'data' => [$despacho_r]
             ],
             [
-                "label" => "Cancelado",
+                "label" => "Desp. Cancelado",
                 'backgroundColor' => ['rgba(255, 99, 132, 0.3)'],
                 'data' => [$despacho_c]
+            ],
+            [
+                "label" => "Recep. No ha Llegado",
+                'backgroundColor' => ['rgba(255, 99, 132, 0.3)'],
+                'data' => [$no_llegado]
+            ],
+            [
+                "label" => "Recep. ´Recibido",
+                'backgroundColor' => ['rgba(255, 99, 132, 0.3)'],
+                'data' => [$recibido]
+            ],
+            [
+                "label" => "Recep. Cancelada",
+                'backgroundColor' => ['rgba(255, 99, 132, 0.3)'],
+                'data' => [$cancelado]
+            ],
+            [
+                "label" => "Recep. Devuelta",
+                'backgroundColor' => ['rgba(255, 99, 132, 0.3)'],
+                'data' => [$devuelto]
             ]
         ])
         ->options([]);
