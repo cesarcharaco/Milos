@@ -159,6 +159,18 @@
                 </div>
                 <!-- /.orders -->
 
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <strong>Grafica de Despacho</strong>
+                        </div>
+                        <div class="card-body card-block">
+                            <div style="width:100%; height: 50%;">
+                                {!! $chartjs->render() !!}
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <!-- .animated -->
         </div>
