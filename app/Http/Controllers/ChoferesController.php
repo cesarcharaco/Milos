@@ -27,7 +27,7 @@ class ChoferesController extends Controller
         $chartjs = app()->chartjs
         ->name('pieChartTest')
         ->type('doughnut')
-        ->size(['width' => 400, 'height' => 200])
+        ->size(['width' => 300, 'height' => 100])
         ->labels(['Activo', 'Reposo','Retirado'])
         ->datasets([
             [

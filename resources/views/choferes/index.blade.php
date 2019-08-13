@@ -27,7 +27,7 @@
         <div class="content">
             <!-- Animated -->
             <div class="animated fadeIn">
-                <div class="col-md-12">
+                <div class="col-md-6 offset-md-6 col-sm-6" >
                     <div class="card">
                         <div class="card-header">
                             <strong>Gráfica de Status de Conductores</strong>
