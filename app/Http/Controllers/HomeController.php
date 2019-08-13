@@ -78,27 +78,27 @@ class HomeController extends Controller
                 'data' => [$despacho_r]
             ],
             [
-                "label" => "Desp. Cancelado",
+                "label" => "Desp. Cancelado:".$despacho_c,
                 'backgroundColor' => ['#FFB6C1'],
                 'data' => [$despacho_c]
             ],
             [
-                "label" => "Recep. No ha Llegado",
+                "label" => "Recep. No ha Llegado:".$no_llegado,
                 'backgroundColor' => ['#FFA500'],
                 'data' => [$no_llegado]
             ],
             [
-                "label" => "Recep. ´Recibido",
+                "label" => "Recep. ´Recibido:".$recibido,
                 'backgroundColor' => ['#EE82EE'],
                 'data' => [$recibido]
             ],
             [
-                "label" => "Recep. Cancelada",
+                "label" => "Recep. Cancelada:".$cancelado,
                 'backgroundColor' => ['#32CD32'],
                 'data' => [$cancelado]
             ],
             [
-                "label" => "Recep. Devuelta",
+                "label" => "Recep. Devuelta:".$devuelto,
                 'backgroundColor' => ['#008B8B'],
                 'data' => [$devuelto]
             ]
