@@ -29,5 +29,5 @@ Route::group(['middleware' => ['auth', 'web']], function () {
 	Route::resource('despachos','DespachosController');
 	Route::post('despachos/cambiar','DespachosController@cambiar_status')->name('despachos.cambiar');
 	Route::resource('recepciones','RecepcionesController');
-
+	
 });

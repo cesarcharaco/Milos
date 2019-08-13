@@ -89,7 +89,7 @@
                                             <label for="kg_pesaje" class=" form-control-label"><b style="color: red;">*</b> Kgs de Pesaje de Llegada</label>
                                         </div>
                                         <div class="col-12 col-md-9">
-                                            <input type="text" id="kg_pesaje" name="kg_pesaje" placeholder="Ingrese los Kilogramos de pesaje de llegada..." class="form-control" required="required" value="{{ $despacho->kg_pesaje }}">
+                                            <input type="text" id="kg_pesaje" name="kg_pesaje" placeholder="Ingrese los Kilogramos de pesaje de llegada..." class="form-control" required="required" @if($despacho->recepciones->kg_pesaje=="") value="{{ $despacho->kg_pesaje }}" @else value="{{ $despacho->recepciones->kg_pesaje }}" @endif>
                                             @error('kg_pesaje')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -110,7 +110,7 @@
                                             <label for="hora_salida" class=" form-control-label"><b style="color: red;">*</b> Hora de Llegada</label>
                                         </div>
                                         <div class="col-12 col-md-9">
-                                            <input type="time" name="hora_llegada" id="hora_llegada" value="{{ $hora }}" step="1" class="form-control" required="required">
+                                            <input type="time" name="hora_llegada" id="hora_llegada" @if($despacho->recepciones->hora_llegada=="") value="{{ $hora }}" @else value="{{ $despacho->recepciones->hora_llegada }}" @endif step="1" class="form-control" required="required">
                                             @error('hora_llegada')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -131,7 +131,7 @@
                                             <label for="total_kg_entrega" class=" form-control-label"><b style="color: red;">*</b>Total Kgs de Entrega</label>
                                         </div>
                                         <div class="col-12 col-md-9">
-                                            <input type="text" id="total_kg_entrega" name="total_kg_entrega" placeholder="Ingrese el total de Kilogramos de Llegada..." class="form-control" required="required" value="{{ $despacho->total_kg_salida }}">
+                                            <input type="text" id="total_kg_entrega" name="total_kg_entrega" placeholder="Ingrese el total de Kilogramos de Llegada..." class="form-control" required="required" @if($despacho->recepciones->total_kg_entrega=="") value="{{ $despacho->total_kg_salida }}" @else value="{{ $despacho->recepciones->total_kg_entrega }}" @endif>
                                             @error('total_kg_entrega')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -145,9 +145,15 @@
                                         </div>
                                         <div class="col-12 col-md-9">
                                             <select class="form-control" name="status" id="status" required="required">
+                                                @if($despacho->recepciones->status=="No ha Llegado")
                                                 <option value="Recibido">Recibido</option>
                                                 <option value="Cancelado">Cancelado</option>
                                                 <option value="Devuelto">Devuelto</option>
+                                                @else
+                                                <option value="Recibido" @if($despacho->recepciones->status=="Recibido") selected="selected" @endif >Recibido</option>
+                                                <option value="Cancelado" @if($despacho->recepciones->status=="Cancelado") selected="selected" @endif >Cancelado</option>
+                                                <option value="Devuelto" @if($despacho->recepciones->status=="Devuelto") selected="selected" @endif >Devuelto</option>
+                                                @endif
                                             </select>
                                         </div>
                                     </div>
@@ -156,7 +162,7 @@
                                             <label for="observaciones" class=" form-control-label">Observaciones</label>
                                         </div>
                                         <div class="col-12 col-md-9">
-                                            <input type="text" id="observaciones" name="observaciones" placeholder="Ingrese alguna observación pertinente..." class="form-control">
+                                            <input type="text" id="observaciones" name="observaciones" placeholder="Ingrese alguna observación pertinente..." class="form-control" @if($despacho->recepciones->observaciones!=="") value="{{ $despacho->recepciones->observaciones }}" @endif>
                                             @error('observaciones')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>

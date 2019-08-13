@@ -84,6 +84,7 @@ class RecepcionesController extends Controller
         $recepcion->hora_llegada=$request->hora_llegada;
         $recepcion->total_kg_entrega=$request->total_kg_entrega;
         $recepcion->status=$request->status;
+        $recepcion->observaciones=$request->observaciones;
         $recepcion->save();
 
         flash('<i class="icon-circle-check"></i> Recepción registrada satisfactoriamente!')->success()->important();

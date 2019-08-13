@@ -86,8 +86,11 @@
                                                 @endif
                                             </td>
                                             <td align="center">
-                                                 
+                                                 @if($key->recepciones->status=="No ha Llegado")
                                                 <a href="{{ route('recepciones.edit',$key->id) }}" title="Registrar Recepción" class="btn btn-info btn-sm"><i class="fa fa-save"></i>&nbsp; </a>
+                                                @else
+                                                <a href="{{ route('recepciones.edit',$key->id) }}" title="Actualizar Despacho" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i>&nbsp; </a>
+                                                @endif
                                                 {{--<a href="#" title="Elimiar Despacho" class="btn btn-danger btn-sm"><i class="fa fa-trash" onclick="eliminar('{{ $key->id }}')" data-toggle="modal" data-target="#modalEliminar"></i>&nbsp; </a>
                                                 <a href="#" title="Cambiar Status Despacho" class="btn btn-success btn-sm"><i class="fa fa-lock" onclick="cambiar_status('{{ $key->id }}','{{ $key->status }}')" data-toggle="modal" data-target="#modalCambiarStatus"></i>&nbsp; </a> --}}
                                             </td>
