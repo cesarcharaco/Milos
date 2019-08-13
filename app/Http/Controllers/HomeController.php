@@ -42,21 +42,28 @@ class HomeController extends Controller
         $hoy=date('Y-m-d');
         $despachos1=Despachos::where('fecha',$hoy)->get();
 
-        $despacho_r=Despachos::where('status','Realizado')->count();
-        $despacho_c=Despachos::where('status','Cancelado')->count();
+        $despacho_r=Despachos::where([['fecha',$hoy],['status','Realizado']])->count();
+        $despacho_c=Despachos::where([['fecha',$hoy],['status','Cancelado']])->count();
+
         $chartjs = app()->chartjs
-        ->name('pieChartTest')
-        ->type('pie')
-        ->size(['width' => 400, 'height' => 200])
-        ->labels(['Realizado', 'Cancelado'])
+        ->name('barChartTest')
+        ->type('bar')
+        ->size(['width' => 800, 'height' => 400])
+        ->labels(['Gráfica de despachos'])
         ->datasets([
             [
-                'backgroundColor' => ['#36A2EB','#FF6384'],
-                'hoverBackgroundColor' => ['#36A2EB','#FF6384'],
-                'data' => [$despacho_r, $despacho_c]
+                "label" => "Realizado",
+                'backgroundColor' => ['rgba(54, 162, 235, 0.2)'],
+                'data' => [$despacho_r]
+            ],
+            [
+                "label" => "Cancelado",
+                'backgroundColor' => ['rgba(255, 99, 132, 0.3)'],
+                'data' => [$despacho_c]
             ]
         ])
         ->options([]);
+
 
         return view('home',compact('total_conductores','total_camiones','total_despachos','total_recepciones','despachos1','chartjs'));
     }

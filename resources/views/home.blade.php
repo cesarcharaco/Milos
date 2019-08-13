@@ -159,10 +159,10 @@
                 </div>
                 <!-- /.orders -->
 
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <strong>Grafica de Despacho</strong>
+                            <strong>Gráfica de Despacho</strong>
                         </div>
                         <div class="card-body card-block">
                             <div style="width:100%; height: 50%;">
