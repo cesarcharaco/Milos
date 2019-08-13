@@ -21,13 +21,13 @@
                     <li>
                         <a href="{{ route('recepciones.index') }}"> <i class="menu-icon ti-shift-left"></i>Llegada de Camiones </a>
                     </li>
-                    <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-bar-chart-o"></i>Reportes</a>
-                        <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-table"></i><a href="#">Despachos y Recepciones</a></li>
-                            <li><i class="fa fa-table"></i><a href="#">Estadísticas Generales</a></li>
-                        </ul>
+                    <li class="menu-title">Reportes</li><!-- /.menu-title -->
+                    <li>
+                        <a href=""> <i class="menu-icon fa fa-list-alt"></i>Despachos y Recepciones </a>
                     </li>
+                    <li>
+                        <a href=""> <i class="menu-icon fa fa-bar-chart-o"></i>Estadísticas Generales </a>
+                    </li>                    
                     @if(\Auth::getUser()->user_type=="Admin")
                     <li class="menu-title">Configuraciones</li><!-- /.menu-title -->
                     <li>
