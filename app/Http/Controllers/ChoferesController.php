@@ -28,11 +28,11 @@ class ChoferesController extends Controller
         ->name('pieChartTest')
         ->type('doughnut')
         ->size(['width' => 300, 'height' => 100])
-        ->labels(['Activo', 'Reposo','Retirado'])
+        ->labels(['Activo: '.$choferes_act, 'Reposo: '.$choferes_rep, 'Retirado: '.$choferes_ret ])
         ->datasets([
             [
-                'backgroundColor' => ['#32CD32', '#FFD700   ', '#FF4500'],
-                'hoverBackgroundColor' => ['#32CD32', '#FFD700  ', '#FF4500'],
+                'backgroundColor' => ['#32CD32', '#FFD700', '#FF4500'],
+                'hoverBackgroundColor' => ['#32CD32', '#FFD700', '#FF4500'],
                 'data' => [$choferes_act, $choferes_rep, $choferes_ret]
             ]
         ])
