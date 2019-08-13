@@ -18,7 +18,26 @@ class CamionesController extends Controller
     {
         $camiones=Camiones::all();
 
-        return view('camiones.index',compact('camiones'));
+        $camiones_act=Camiones::where('status','Activo')->count();
+        $camiones_tal=Camiones::where('status','Taller')->count();
+        $camiones_ret=Camiones::where('status','Retirado')->count();
+        // ExampleController.php
+
+        $chartjs = app()->chartjs
+        ->name('pieChartTest')
+        ->type('doughnut')
+        ->size(['width' => 300, 'height' => 100])
+        ->labels(['Activo: '.$camiones_act, 'Taller: '.$camiones_tal, 'Retirado: '.$camiones_ret ])
+        ->datasets([
+            [
+                'backgroundColor' => ['#32CD32', '#FFD700', '#FF4500'],
+                'hoverBackgroundColor' => ['#32CD32', '#FFD700', '#FF4500'],
+                'data' => [$camiones_act, $camiones_tal, $camiones_ret]
+            ]
+        ])
+        ->options([]);
+
+        return view('camiones.index',compact('camiones','chartjs'));
     }
 
     /**

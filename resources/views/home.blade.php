@@ -144,7 +144,15 @@
                                                         @endif
                                                     </td>
                                                     <td>
-                                                        {{ $key->recepciones->status }}
+                                                        @if($key->recepciones->status=="No ha Llegado")
+                                                            <span class="badge badge-secondary">{{ $key->recepciones->status }}</span>
+                                                        @elseif($key->recepciones->status=="Recibido")
+                                                            <span class="badge badge-success">{{ $key->recepciones->status }}</span>
+                                                        @elseif($key->recepciones->status=="Cancelado")
+                                                            <span class="badge badge-danger">{{ $key->recepciones->status }}</span>
+                                                        @elseif($key->recepciones->status=="Devuelto")
+                                                            <span class="badge badge-info">{{ $key->recepciones->status }}</span>
+                                                        @endif
                                                     </td>
                                                 </tr>
                                                 @endforeach
