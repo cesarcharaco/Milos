@@ -30,7 +30,7 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <strong>Gráfica de Despacho</strong>
+                            <strong>Gráfica de Status de Conductores</strong>
                         </div>
                         <div class="card-body card-block">
                             <div style="width:100%; height: 50%;">
