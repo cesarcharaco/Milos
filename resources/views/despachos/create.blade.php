@@ -87,7 +87,7 @@
                                                 @foreach($choferes as $key)
                                                     @php $cont=0; @endphp
                                                     @foreach($despachos as $key2)
-                                                        @if($key2->id_chofer==$key->id_chofer)
+                                                        @if($key2->id_chofer==$key->id_chofer && $key2->recepciones->status=="No ha Llegado")
                                                             @php $cont++; @endphp
                                                         @endif
                                                     @endforeach

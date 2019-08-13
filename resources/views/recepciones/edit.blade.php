@@ -57,7 +57,7 @@
                                             <label for="num_guia_romana" class=" form-control-label"> Número de Guía Romana</label>
                                         </div>
                                         <div class="col-12 col-md-9">
-                                            <input type="text" id="nombres" name="num_guia_romana" class="form-control" readonly="readonly" value="{{ $despacho->num_guia }}">
+                                            <input type="text" id="num_guia_romana" name="num_guia_romana" class="form-control" readonly="readonly" value="{{ $despacho->num_guia }}">
                                         </div>
                                     </div>
                                     <div class="row form-group">

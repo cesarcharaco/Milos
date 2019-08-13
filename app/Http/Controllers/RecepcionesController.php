@@ -79,16 +79,34 @@ class RecepcionesController extends Controller
     public function update(RecepcionesRequest $request,$id)
     {
         $recepcion=Recepciones::where('id_despacho',$id)->first();
+        $despacho=Despachos::find($id);
 
+        if ($despacho->status=="Cancelado" && $request->status=="Recibido") {
+            flash('<i class="icon-circle-check"></i> El Despacho fue Cancelado no se puede marcar como <b>Recibido</b> a la Recepción, por favor elija otro status!')->warning()->important();
+            return redirect()->back();
+        } else {
+            
         $recepcion->kg_pesaje=$request->kg_pesaje;
+        $recepcion->num_guia_romana=$request->num_guia_romana;
         $recepcion->hora_llegada=$request->hora_llegada;
         $recepcion->total_kg_entrega=$request->total_kg_entrega;
         $recepcion->status=$request->status;
         $recepcion->observaciones=$request->observaciones;
         $recepcion->save();
-
-        flash('<i class="icon-circle-check"></i> Recepción registrada satisfactoriamente!')->success()->important();
+        if ($request->status=="Cancelado" || $request->status=="Devuelto") {
+            
+            $despacho->status="Cancelado";
+            $despacho->save();
+            flash('<i class="icon-circle-check"></i> Recepción fue <b>'.$request->status.'</b> satisfactoriamente, y el Despacho se cambió a status <b>Cancelado</b>!')->success()->important();
+        } else {
+            
+            flash('<i class="icon-circle-check"></i> Recepción registrada satisfactoriamente!')->success()->important();    
+        }
+        
         return redirect()->to('recepciones');  
+
+        }
+        
     }
 
     /**

@@ -129,11 +129,28 @@ class DespachosController extends Controller
     public function cambiar_status(Request $request)
     {
         $despacho=Despachos::find($request->id_despacho);
+        $recepcion=Recepciones::where('id_despacho',$request->id_despacho)->first();
 
-        $despacho->status=$request->status;
-        $despacho->save();
-
-        flash('<i class="icon-circle-check"></i>Status de Despacho cambiado a <b>'.$request->status.'</b>  satisfactoriamente!')->success()->important();
-        return redirect()->to('despachos');
+        if ($request->status=="Cancelado") {
+            if ($recepcion->status=="Recibido") {
+                flash('<i class="icon-circle-check"></i>No se puede cambiar el status a <b>'.$request->status.'</b>  debido a que ya fue recibido!')->warning()->important();
+                return redirect()->to('despachos');        
+            } else {
+                $despacho->status=$request->status;
+                $despacho->save();
+                $recepcion->status="Cancelado";
+                $recepcion->save();
+                flash('<i class="icon-circle-check"></i>El Despacho fue cambiado a status de <b>'.$request->status.'</b>  y se Cancela la Recepción también!')->warning()->important();
+                return redirect()->to('despachos'); 
+            }
+            
+        } else {
+            $despacho->status=$request->status;
+            $despacho->save();
+            $recepcion->status="No ha Llegado";
+            $recepcion->save();
+            flash('<i class="icon-circle-check"></i>El Despacho fue cambiado a status de <b>'.$request->status.'</b>  y la Recepción a status <b>No ha Llegado</b>!')->warning()->important();
+            return redirect()->to('despachos'); 
+        }
     }
 }
