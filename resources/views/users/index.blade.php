@@ -29,7 +29,7 @@
             <div class="animated fadeIn">
                 <!-- Widgets  -->
                 <div class="row">
-                                        <div class="col-md-12">
+                    <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
                                 <strong class="card-title">Usuarios</strong>
@@ -52,7 +52,13 @@
                                             <td>{{ $key->name}}</td>
                                             <td>{{ $key->email }}</td>
                                             <td>{{ $key->user_type }}</td>
-                                            <td>{{ $key->status }}</td>
+                                            <td>
+                                                @if($key->status=="Activo")
+                                                    <span class="badge badge-success">{{ $key->status }}</span>
+                                                @elseif($key->status=="Inactivo")
+                                                    <span class="badge badge-danger">{{ $key->status }}</span>
+                                                @endif
+                                            </td>
                                             <td align="center">
                                                 <a href="{{ route('users.edit', $key->id) }}" class="btn btn-info btn-sm"><i class="fa fa-edit"></i>&nbsp; </a>
                                                 <a href="#" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i>&nbsp; </a>

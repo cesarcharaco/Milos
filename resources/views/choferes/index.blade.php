@@ -72,7 +72,15 @@
                                             <td>{{ $key->edad }}</td>
                                             <td>{{ $key->licencia }}</td>
                                             <td>{{ $key->certificado }}</td>
-                                            <td>{{ $key->status }}</td>
+                                            <td>
+                                                @if($key->status=="Activo")
+                                                    <span class="badge badge-success">{{ $key->status }}</span>
+                                                @elseif($key->status=="Reposo")
+                                                    <span class="badge badge-warning">{{ $key->status }}</span>
+                                                @elseif($key->status=="Retirado")
+                                                    <span class="badge badge-danger">{{ $key->status }}</span>
+                                                @endif
+                                            </td>
                                             <td align="center">
                                                 @if(buscar_asignacion($key->id)=="No" and $key->status=="Activo")
                                                     <a href="{{ route('choferes.asignar',$key->id) }}" title="Asignar Camión" class="btn btn-info btn-sm"><i class="fa fa-truck"></i>&nbsp; </a>

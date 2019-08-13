@@ -74,7 +74,17 @@
                                             <td>{{ $key->recepciones->hora_llegada }}</td>
                                             <td>{{ $key->recepciones->total_kg_entrega }}</td>
                                             <td>{{ $key->recepciones->observaciones }}</td>
-                                            <td>{{ $key->recepciones->status }}</td>
+                                            <td>
+                                                @if($key->recepciones->status=="No ha Llegado")
+                                                    <span class="badge badge-info">{{ $key->recepciones->status }}</span>
+                                                @elseif($key->recepciones->status=="Recibido")
+                                                    <span class="badge badge-success">{{ $key->recepciones->status }}</span>
+                                                @elseif($key->recepciones->status=="Cancelado")
+                                                    <span class="badge badge-danger">{{ $key->recepciones->status }}</span>
+                                                @elseif($key->recepciones->status=="Devuelto")
+                                                    <span class="badge badge-warning">{{ $key->recepciones->status }}</span>
+                                                @endif
+                                            </td>
                                             <td align="center">
                                                  
                                                 <a href="{{ route('recepciones.edit',$key->id) }}" title="Registrar Recepción" class="btn btn-info btn-sm"><i class="fa fa-edit"></i>&nbsp; </a>

@@ -70,7 +70,15 @@
                                             <td>{{ $key->vin }}</td>
                                             <td>{{ $key->anio }}</td>
                                             <td>{{ $key->capacidad }}</td>
-                                            <td>{{ $key->status }}</td>
+                                            <td>
+                                                @if($key->status=="Activo")
+                                                    <span class="badge badge-success">{{ $key->status }}</span>
+                                                @elseif($key->status=="Taller")
+                                                    <span class="badge badge-warning">{{ $key->status }}</span>
+                                                @elseif($key->status=="Retirado")
+                                                    <span class="badge badge-danger">{{ $key->status }}</span>
+                                                @endif
+                                            </td>
                                             <td align="center">
                                                 <a href="{{ route('camiones.edit',$key->id) }}" class="btn btn-info btn-sm"><i class="fa fa-edit"></i>&nbsp; </a>
                                                 <a href="#" class="btn btn-danger btn-sm"><i class="fa fa-trash" onclick="eliminar('{{ $key->id }}')" data-toggle="modal" data-target="#modalEliminar"></i>&nbsp; </a>

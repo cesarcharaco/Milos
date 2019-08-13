@@ -74,7 +74,13 @@
                                             <td>{{ $key->hora_salida }}</td>
                                             <td>{{ $key->total_kg_salida }}</td>
                                             <td>{{ $key->observaciones }}</td>
-                                            <td>{{ $key->status }}</td>
+                                            <td>
+                                                @if($key->status=="Realizado")
+                                                    <span class="badge badge-success">{{ $key->status }}</span>
+                                                @elseif($key->status=="Cancelado")
+                                                    <span class="badge badge-danger">{{ $key->status }}</span>
+                                                @endif
+                                            </td>
                                             <td align="center">
                                                 
                                                 <a href="{{ route('despachos.edit',$key->id) }}" title="Actualizar Despacho" class="btn btn-info btn-sm"><i class="fa fa-edit"></i>&nbsp; </a>
