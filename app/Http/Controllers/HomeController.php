@@ -73,7 +73,7 @@ class HomeController extends Controller
         ->labels(['Gráfica de despachos'])
         ->datasets([
             [
-                "label" => "Desp. Realizado",
+                "label" => "Desp. Realizado:".$despacho_r,
                 'backgroundColor' => ['#FFA07A'],
                 'data' => [$despacho_r]
             ],
