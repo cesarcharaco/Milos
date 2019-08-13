@@ -69,37 +69,37 @@ class HomeController extends Controller
         $chartjs = app()->chartjs
         ->name('barChartTest')
         ->type('bar')
-        ->size(['width' => 800, 'height' => 400])
+        ->size(['width' => 800, 'height' => 200])
         ->labels(['Gráfica de despachos'])
         ->datasets([
             [
                 "label" => "Desp. Realizado",
-                'backgroundColor' => ['rgba(54, 162, 235, 0.2)'],
+                'backgroundColor' => ['#FFA07A'],
                 'data' => [$despacho_r]
             ],
             [
                 "label" => "Desp. Cancelado",
-                'backgroundColor' => ['rgba(255, 99, 132, 0.3)'],
+                'backgroundColor' => ['#FFB6C1'],
                 'data' => [$despacho_c]
             ],
             [
                 "label" => "Recep. No ha Llegado",
-                'backgroundColor' => ['rgba(255, 99, 132, 0.3)'],
+                'backgroundColor' => ['#FFA500'],
                 'data' => [$no_llegado]
             ],
             [
                 "label" => "Recep. ´Recibido",
-                'backgroundColor' => ['rgba(255, 99, 132, 0.3)'],
+                'backgroundColor' => ['#EE82EE'],
                 'data' => [$recibido]
             ],
             [
                 "label" => "Recep. Cancelada",
-                'backgroundColor' => ['rgba(255, 99, 132, 0.3)'],
+                'backgroundColor' => ['#32CD32'],
                 'data' => [$cancelado]
             ],
             [
                 "label" => "Recep. Devuelta",
-                'backgroundColor' => ['rgba(255, 99, 132, 0.3)'],
+                'backgroundColor' => ['#008B8B'],
                 'data' => [$devuelto]
             ]
         ])

@@ -18,8 +18,27 @@ class ChoferesController extends Controller
     public function index()
     {
         $choferes=Choferes::all();
-        
-        return view('choferes.index',compact('choferes'));
+
+        $choferes_act=Choferes::where('status','Activo')->count();
+        $choferes_rep=Choferes::where('status','Reposo')->count();
+        $choferes_ret=Choferes::where('status','Retirado')->count();
+        // ExampleController.php
+
+        $chartjs = app()->chartjs
+        ->name('pieChartTest')
+        ->type('doughnut')
+        ->size(['width' => 400, 'height' => 200])
+        ->labels(['Activo', 'Reposo','Retirado'])
+        ->datasets([
+            [
+                'backgroundColor' => ['#32CD32', '#FFD700   ', '#FF4500'],
+                'hoverBackgroundColor' => ['#32CD32', '#FFD700  ', '#FF4500'],
+                'data' => [$choferes_act, $choferes_rep, $choferes_ret]
+            ]
+        ])
+        ->options([]);
+
+        return view('choferes.index',compact('choferes','chartjs'));
     }
 
     /**

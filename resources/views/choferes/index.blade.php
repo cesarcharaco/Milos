@@ -27,6 +27,18 @@
         <div class="content">
             <!-- Animated -->
             <div class="animated fadeIn">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <strong>Gráfica de Despacho</strong>
+                        </div>
+                        <div class="card-body card-block">
+                            <div style="width:100%; height: 50%;">
+                                {!! $chartjs->render() !!}
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <!-- Widgets  -->
                 <div class="row">
                     <div class="col-md-12">
