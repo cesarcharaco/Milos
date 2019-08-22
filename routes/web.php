@@ -30,5 +30,6 @@ Route::group(['middleware' => ['auth', 'web']], function () {
 	Route::post('despachos/cambiar','DespachosController@cambiar_status')->name('despachos.cambiar');
 	Route::resource('recepciones','RecepcionesController');
 	Route::resource('reportes','ReportesController');
+	Route::post('reportes/filtro','ReportesController@filtro')->name('reportes.filtro');
 	
 });

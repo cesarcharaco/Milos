@@ -17,28 +17,16 @@ class ReportesController extends Controller
      */
     public function index()
     {
-        $conductores=Choferes::all();
-        $total_conductores=count($conductores);
+        $despachos1=Despachos::all();
 
-        $camiones=Camiones::all();
-        $total_camiones=count($camiones);
-
-        $despachos=Despachos::all();
-        $total_despachos=count($despachos);
-
-        $recepciones=Recepciones::all();
-        $total_recepciones=count($recepciones);
-        
-        $hoy=date('Y-m-d');
-        $despachos1=Despachos::where('fecha',$hoy)->get();
-
-        $despacho_r=Despachos::where([['fecha',$hoy],['status','Realizado']])->count();
-        $despacho_c=Despachos::where([['fecha',$hoy],['status','Cancelado']])->count();
+        $despacho_r=Despachos::where('status','Realizado')->count();
+        $despacho_c=Despachos::where('status','Cancelado')->count();
 
         $no_llegado=0;
         $recibido=0;
         $cancelado=0;
         $devuelto=0;
+
         foreach ($despachos1 as $key) {
             switch ($key->recepciones->status) {
                 case 'No ha Llegado':
@@ -96,7 +84,7 @@ class ReportesController extends Controller
         ->options([]);
 
 
-        return view('reportes.index',compact('total_conductores','total_camiones','total_despachos','total_recepciones','despachos1','chartjs'));
+        return view('reportes.index',compact('despachos1','chartjs'));
     }
 
     /**
@@ -106,7 +94,7 @@ class ReportesController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -117,7 +105,89 @@ class ReportesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function filtro(Request $request)
+    {
+        //dd($request->all());
+        $despachos_rea = Despachos::select('despachos.fecha','despachos.status')
+            ->join('recepciones', 'recepciones.id_despacho', '=', 'despachos.id')
+            ->whereBetween('despachos.fecha', [$request->fecha_desde, $request->fecha_hasta])
+            ->where('despachos.status','Realizado')->count();
+
+        $despachos_can = Despachos::select('despachos.fecha','despachos.status')
+            ->join('recepciones', 'recepciones.id_despacho', '=', 'despachos.id')
+            ->whereBetween('despachos.fecha', [$request->fecha_desde, $request->fecha_hasta])
+            ->where('despachos.status','Cancelado')->count();
+
+        $despachos_nhl = Despachos::select('despachos.fecha','recepciones.status')
+            ->join('recepciones', 'recepciones.id_despacho', '=', 'despachos.id')
+            ->whereBetween('despachos.fecha', [$request->fecha_desde, $request->fecha_hasta])
+            ->where('recepciones.status','No ha Llegado')->count();
+
+        $despachos_rec = Despachos::select('despachos.fecha','recepciones.status')
+            ->join('recepciones', 'recepciones.id_despacho', '=', 'despachos.id')
+            ->whereBetween('despachos.fecha', [$request->fecha_desde, $request->fecha_hasta])
+            ->where('recepciones.status','Recibido')->count();
+
+        $despachos_rcan = Despachos::select('despachos.fecha','recepciones.status')
+            ->join('recepciones', 'recepciones.id_despacho', '=', 'despachos.id')
+            ->whereBetween('despachos.fecha', [$request->fecha_desde, $request->fecha_hasta])
+            ->where('recepciones.status','Cancelado')->count();
+
+        $despachos_dev = Despachos::select('despachos.fecha','recepciones.status')
+            ->join('recepciones', 'recepciones.id_despacho', '=', 'despachos.id')
+            ->whereBetween('despachos.fecha', [$request->fecha_desde, $request->fecha_hasta])
+            ->where('recepciones.status','Devuelto')->count();
+
+        $chartjs = app()->chartjs
+        ->name('barChartTest')
+        ->type('bar')
+        ->size(['width' => 800, 'height' => 200])
+        ->labels(['Gráfica de despachos'])
+        ->datasets([
+            [
+                "label" => "Desp. Realizado:".$despachos_rea,
+                'backgroundColor' => ['#FFA07A'],
+                'data' => [$despachos_rea]
+            ],
+            [
+                "label" => "Desp. Cancelado:".$despachos_can,
+                'backgroundColor' => ['#FFB6C1'],
+                'data' => [$despachos_can]
+            ],
+            [
+                "label" => "Recep. No ha Llegado:".$despachos_nhl,
+                'backgroundColor' => ['#FFA500'],
+                'data' => [$despachos_nhl]
+            ],
+            [
+                "label" => "Recep. ´Recibido:".$despachos_rec,
+                'backgroundColor' => ['#EE82EE'],
+                'data' => [$despachos_rec]
+            ],
+            [
+                "label" => "Recep. Cancelada:".$despachos_rcan,
+                'backgroundColor' => ['#32CD32'],
+                'data' => [$despachos_rcan]
+            ],
+            [
+                "label" => "Recep. Devuelta:".$despachos_dev,
+                'backgroundColor' => ['#008B8B'],
+                'data' => [$despachos_dev]
+            ]
+        ])
+        ->options([]);
+
+        return view('reportes.filtro', compact('chartjs'));
+
     }
 
     /**
@@ -128,7 +198,7 @@ class ReportesController extends Controller
      */
     public function show($id)
     {
-        //
+        dd('show');
     }
 
     /**
